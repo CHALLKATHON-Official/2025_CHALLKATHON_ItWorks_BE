@@ -19,7 +19,11 @@ const PORT = process.env.PORT || 4000;
 connectDB();
 
 // ✅ 미들웨어
-app.use(cors());
+app.use(cors({
+  origin: 'https://two025-challkathon-itworks-be-xrja.onrender.com',
+  credentials: true,
+}));
+
 app.use(express.json());
 
 // ✅ 정적 파일 경로 (이미지 접근용)
