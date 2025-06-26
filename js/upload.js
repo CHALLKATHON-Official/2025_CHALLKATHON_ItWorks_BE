@@ -1,21 +1,17 @@
+const { GridFsStorage } = require("multer-gridfs-storage");
 const multer = require("multer");
-const path = require("path");
-const fs = require("fs");
 
-const uploadDir = path.join(__dirname, "..", "uploads");
+const mongoURI = "mongodb://localhost:27017/your-db-name"; // ← 본인 DB 주소로 변경
 
-// uploads 폴더가 없으면 생성
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir);
-}
-
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, uploadDir);
-  },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    cb(null, uniqueSuffix + path.extname(file.originalname));
+// ✅ GridFS 스토리지 설정
+const storage = new GridFsStorage({
+  url: mongoURI,
+  file: (req, file) => {
+    const filename = `image_${Date.now()}_${file.originalname}`;
+    return {
+      filename,
+      bucketName: "uploads", // MongoDB의 fs.files → uploads.files 로 저장됨
+    };
   },
 });
 
