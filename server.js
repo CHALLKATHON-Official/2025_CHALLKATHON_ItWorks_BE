@@ -20,7 +20,7 @@ connectDB();
 
 // ✅ 미들웨어
 app.use(cors({
-  origin: 'https://two025-challkathon-itworks-be-xrja.onrender.com',
+  origin: 'https://cool-seahorse-936071.netlify.app',
   credentials: true,
 }));
 
