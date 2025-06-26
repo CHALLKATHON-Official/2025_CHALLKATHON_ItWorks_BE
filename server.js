@@ -20,7 +20,7 @@ connectDB();
 
 // ✅ 미들웨어
 app.use(cors({
-  origin: 'https://cool-seahorse-936071.netlify.app',
+  origin: 'https://reletter-itworks.netlify.app',
   credentials: true,
 }));
 
